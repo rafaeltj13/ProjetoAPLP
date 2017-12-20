@@ -204,7 +204,7 @@ checarGol foiGol = do
 --Faz a simulação do chute
 chutar :: Int -> Int
 chutar localDoChute =
- if(localDoChute == $ puloGoleiro (localDoChute)) then 0
+ if(localDoChute == 0) then 0
   else 1
 
 --Calcula o vencedor da partida
@@ -215,11 +215,10 @@ resultado placar1 placar2 =
     if(placar1 < placar2) then "Jogador 2 venceu!!!"
      else "Empate!!!"
 
-puloGoleiro :: Int -> IO()
-puloGoleiro localDoChute = do
-
- if(localDoChute <= 2) then Random.randomRIO(1, 2)
-  else
-    if(localDoChute <= 4) then Random.randomRIO(3, 4)
-     else
-      Random.randomRIO(5, 6)
+--puloGoleiro :: Int -> IO()
+--puloGoleiro localDoChute = do
+ --if(localDoChute <= 2) then Random.randomRIO(1, 2)
+  --else
+   -- if(localDoChute <= 4) then Random.randomRIO(3, 4)
+    -- else
+     -- Random.randomRIO(5, 6)
