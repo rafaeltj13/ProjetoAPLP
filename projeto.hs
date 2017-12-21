@@ -183,162 +183,11 @@ umJogador = do
 doisJogadores :: IO ()
 doisJogadores = do
 
+ let rodadaInicial = 1
  let placar1 = 0
  let placar2 = 0
 
- --Primeira Rodada
- putStrLn(" ")
- putStrLn("Primeira Rodada!")
- mostrarPlacar2 placar1 placar2
-
- putStrLn("JOGADOR 1:")
- opcoesDeChute
- localChute11 <- getLine
- let chute11 = read localChute11 :: Int
-
- puloGoleiro <- randomRIO(chute11, chute11+1)
- let foiGol = chutar chute11 puloGoleiro
- checarGol(foiGol)
-
- let aux = placar1
- let placar1 = aux + foiGol
-
- putStrLn("JOGADOR 2:")
- opcoesDeChute
- localChute21 <- getLine
- let chute21 = read localChute21 :: Int
-
- puloGoleiro <- randomRIO(chute21, chute21+1)
- let foiGol = chutar chute21 puloGoleiro
- checarGol(foiGol)
- 
- let aux = placar2
- let placar2 = aux + foiGol
-
- --Segunda Rodada
- putStrLn(" ")
- putStrLn("Segunda Rodada!")
- mostrarPlacar2 placar1 placar2
-
- putStrLn("JOGADOR 1:")
- opcoesDeChute
- localChute12 <- getLine
- let chute12 = read localChute12 :: Int
-
- puloGoleiro <- randomRIO(chute12, chute12+1)
- let foiGol = chutar chute12 puloGoleiro
- checarGol(foiGol)
-
- let aux = placar1
- let placar1 = aux + foiGol
-
- putStrLn("JOGADOR 2:")
- opcoesDeChute
- localChute22 <- getLine
- let chute22 = read localChute22 :: Int
-
- puloGoleiro <- randomRIO(chute22, chute22+1)
- let foiGol = chutar chute22 puloGoleiro
- checarGol(foiGol)
- 
- let aux = placar2
- let placar2 = aux + foiGol
-
- --Terceira Rodada
- putStrLn(" ")
- putStrLn("Terceira Rodada!")
- mostrarPlacar2 placar1 placar2
-
- putStrLn("JOGADOR 1:")
- opcoesDeChute
- localChute13 <- getLine
- let chute13 = read localChute13 :: Int
-
- puloGoleiro <- randomRIO(chute13, chute13+1)
- let foiGol = chutar chute13 puloGoleiro
- checarGol(foiGol)
-
- let aux = placar1
- let placar1 = aux + foiGol
-
- putStrLn("JOGADOR 2:")
- opcoesDeChute
- localChute23 <- getLine
- let chute23 = read localChute23 :: Int
-
- puloGoleiro <- randomRIO(chute23, chute23+1)
- let foiGol = chutar chute23 puloGoleiro
- checarGol(foiGol)
- 
- let aux = placar2
- let placar2 = aux + foiGol
-
- mostrarPlacar2 placar1 placar2
-
- --Quarta Rodada
- putStrLn(" ")
- putStrLn("Quarta Rodada!")
- mostrarPlacar2 placar1 placar2
-
- putStrLn("JOGADOR 1:")
- opcoesDeChute
- localChute14 <- getLine
- let chute14 = read localChute14 :: Int
-
- puloGoleiro <- randomRIO(chute14, chute14+1)
- let foiGol = chutar chute14 puloGoleiro
- checarGol(foiGol)
-
- let aux = placar1
- let placar1 = aux + foiGol
-
- putStrLn("JOGADOR 2:")
- opcoesDeChute
- localChute24 <- getLine
- let chute24 = read localChute24 :: Int
-
- puloGoleiro <- randomRIO(chute24, chute24+1)
- let foiGol = chutar chute24 puloGoleiro
- checarGol(foiGol)
- 
- let aux = placar2
- let placar2 = aux + foiGol
-
- mostrarPlacar2 placar1 placar2
-
- --Quinta Rodada
- putStrLn(" ")
- putStrLn("Quinta Rodada!")
- mostrarPlacar2 placar1 placar2
-
- putStrLn("JOGADOR 1:")
- opcoesDeChute
- localChute15 <- getLine
- let chute15 = read localChute15 :: Int
-
- puloGoleiro <- randomRIO(chute15, chute15+1)
- let foiGol = chutar chute15 puloGoleiro
- checarGol(foiGol)
-
- let aux = placar1
- let placar1 = aux + foiGol
-
- putStrLn("JOGADOR 2:")
- opcoesDeChute
- localChute25 <- getLine
- let chute25 = read localChute25 :: Int
-
- puloGoleiro <- randomRIO(chute25, chute25+1)
- let foiGol = chutar chute25 puloGoleiro
- checarGol(foiGol)
- 
- let aux = placar2
- let placar2 = aux + foiGol
-
- mostrarPlacar2 placar1 placar2
-
- let resultadoFinal = resultado placar1 placar2
- putStrLn(resultadoFinal)
+ rodadas2jogadores rodadaInicial placar1 placar2
 
 --Mostra as opções de chute
 opcoesDeChute :: IO ()
@@ -390,3 +239,44 @@ resultadoUmJogador placar1 placar2 =
    else
     if(placar1 < placar2) then"PC venceu!!!"
      else "Empate!!!"
+
+rodadas2jogadores :: Int -> Int -> Int -> IO()
+rodadas2jogadores 6 placar1 placar2 = do
+  mostrarPlacar2 placar1 placar2
+  let resultadoFinal = resultado placar1 placar2
+  putStrLn(resultadoFinal)
+
+rodadas2jogadores rodadaAtual placar1 placar2 = do
+    putStrLn(" ")
+    imprimirRodada rodadaAtual
+    mostrarPlacar2 placar1 placar2
+    putStrLn("JOGADOR 1:")
+    opcoesDeChute
+    localChute1 <- getLine
+    let chute1 = read localChute1 :: Int
+    puloGoleiro <- randomRIO(chute1, chute1+1)
+    let foiGol = chutar chute1 puloGoleiro
+    checarGol(foiGol)
+
+    let novoPlacar1 = placar1 + foiGol
+
+    putStrLn("JOGADOR 2:")
+    opcoesDeChute
+    localChute2 <- getLine
+    let chute2 = read localChute2 :: Int
+    puloGoleiro <- randomRIO(chute2, chute2+1)
+    let foiGol = chutar chute2 puloGoleiro
+    checarGol(foiGol)
+
+    let novoPlacar2 = placar2 + foiGol
+
+    rodadas2jogadores (rodadaAtual+1) novoPlacar1 novoPlacar2
+
+imprimirRodada :: Int -> IO()
+imprimirRodada rodadaAtual
+ | rodadaAtual == 1 = putStrLn("Primeira Rodada!")
+ | rodadaAtual == 2 = putStrLn("Segunda Rodada!")
+ | rodadaAtual == 3 = putStrLn("Terceira Rodada!")
+ | rodadaAtual == 4 = putStrLn("Quarta Rodada!")
+ | rodadaAtual == 5 = putStrLn("Quinta Rodada!")
+ | otherwise = putStrLn("Fim de jogo")
